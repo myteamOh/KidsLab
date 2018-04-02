@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="intro"
+		template="/WEB-INF/views/template/client/mainLayout.jsp">
+		<put-attribute name="title" value="000 사이트" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/template/client/header.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/template/client/footer.jsp" />
+	</definition>
+
+	<definition name="content"
+		template="/WEB-INF/views/template/client/contentLayout.jsp">
+		<put-attribute name="title" value="000 사이트" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/template/client/header.jsp" />
+		<put-attribute name="side" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/template/client/footer.jsp" />
+	</definition>
+
+
+	<!-- 강의게시판 타일즈 -->
+	<definition name="courseBoardContent"
+		template="/WEB-INF/views/template/client/contentLayout.jsp">
+		<put-attribute name="title" value="000 사이트" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/template/client/header.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/template/client/courseSide.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/template/client/footer.jsp" />
+	</definition>
+
+	<definition name="client/member/*" extends="content">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/member/{1}.jsp" />
+	</definition>
+
+	<definition name="inquiry/*" extends="content">
+		<put-attribute name="title" value="1:1문의" />
+		<put-attribute name="body" value="/WEB-INF/views/inquiry/{1}.jsp" />
+	</definition>
+
+	<definition name="teacher/login/*" extends="content">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/teacher/login/{1}.jsp" />
+	</definition>
+
+	<definition name="client/mypage/*" extends="content">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/mypage/{1}.jsp" />
+	</definition>
+
+	<definition name="client/courseApply/*" extends="content">
+		<put-attribute name="title" value="수강신청" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/courseApply/{1}.jsp" />
+	</definition>
+
+	<definition name="client/notice/*" extends="content">
+		<put-attribute name="title" value="공지사항" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/notice/{1}.jsp" />
+	</definition>
+
+	<definition name="client/coursePage/*" extends="courseBoardContent">
+		<put-attribute name="title" value="강의페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/coursePage/{1}.jsp" />
+	</definition>
+
+	<definition name="client/gallery/*" extends="content">
+		<put-attribute name="title" value="프로젝트 갤러리" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/gallery/{1}.jsp" />
+	</definition>
+
+	<definition name="client/faq/*" extends="content">
+		<put-attribute name="title" value="FAQ" />
+		<put-attribute name="body" value="/WEB-INF/views/client/faq/{1}.jsp" />
+	</definition>
+
+	<definition name="client/introduce/*" extends="content">
+		<put-attribute name="title" value="ABOUT" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/client/introduce/{1}.jsp" />
+	</definition>
+
+
+	<!-- 강사 페이지 -->
+	<definition name="teacher/course/*" extends="content">
+		<put-attribute name="title" value="강의등록" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/teacher/course/{1}.jsp" />
+	</definition>
+
+	<definition name="teacher/mypage/*" extends="content">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/teacher/mypage/{1}.jsp" />
+	</definition>
+
+	<definition name="teacher/gallery/*" extends="content">
+		<put-attribute name="title" value="갤러리" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/teacher/gallery/{1}.jsp" />
+	</definition>
+
+</tiles-definitions> 

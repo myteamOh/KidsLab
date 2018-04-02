@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kidslab.client.inquiry.dao.InquiryDAO">
+
+
+
+
+	<!-- 관리자 1:1 문의 조회 -->
+	<select id="adminInquiryList" parameterType="inquiry"
+		resultType="inquiry">
+		Select
+		inquiry_no,
+		a.parent_no as parent_no,
+		b.parent_id as
+		parent_id,
+		inquiry_title,
+		inquiry_content,
+		to_char(inquiry_registerdate,
+		'yyyy-mm-dd')as
+		inquiry_registerdate
+		from
+		board_inquiry a, parent b
+		where
+		a.parent_no =
+		b.parent_no
+		order by inquiry_no desc
+	</select>
+
+	<!-- 1:1 문의 조회 -->
+	<select id="inquiryList" parameterType="inquiry" resultType="inquiry">
+
+		Select
+		inquiry_no,
+		parent_no,
+		inquiry_title,
+		inquiry_content,
+		to_char(inquiry_registerdate, 'yyyy-mm-dd')as inquiry_registerdate
+		from
+		board_inquiry
+		<where>
+			parent_no = #{parent_no}
+		</where>
+		order by inquiry_no desc
+
+	</select>
+
+
+
+	<!-- 상세 페이지를 위한 게시물 조회 -->
+	<select id="inquiryDetail" parameterType="int" resultType="inquiry">
+
+		Select
+		inquiry_no,
+		a.parent_no,
+		b.parent_id,
+		inquiry_title,
+		inquiry_content,
+		to_char(inquiry_registerdate, 'yyyy-mm-dd')as
+		inquiry_registerdate
+		from
+		board_inquiry a, parent b
+		where
+		a.parent_no =
+		b.parent_no and
+		inquiry_no =
+		#{inquiry_no}
+	</select>
+
+
+	<!-- 게시물 등록 -->
+	<insert id="inquiryInsert" parameterType="inquiry">
+		<selectKey keyProperty="inquiry_no" resultType="int" order="BEFORE">
+			select board_inquiry_seq.nextval from dual
+		</selectKey>
+		Insert into board_inquiry (
+		inquiry_no,
+		parent_no,
+		inquiry_title,
+		inquiry_content
+
+		) values(
+		#{inquiry_no},
+		#{parent_no},
+		#{inquiry_title},
+		#{inquiry_content}
+
+		)
+
+	</insert>
+
+	<!-- 댓글 달았을 시 게시물에 [답변완료] 생성 -->
+	<update id="replySuccessUpdate">
+		update board_inquiry
+		set inquiry_title =
+		#{inquiry_title} || ' [답변완료]'
+		where inquiry_no = #{inquiry_no}
+	</update>
+
+	<!-- 게시물 수정 -->
+	<update id="inquiryUpdate" parameterType="inquiry">
+		Update board_inquiry
+		SET inquiry_title = #{inquiry_title},
+		inquiry_content =
+		#{inquiry_content}
+		where inquiry_no = #{inquiry_no}
+
+
+	</update>
+
+	<!-- 게시물 삭제 -->
+	<delete id="inquiryDelete" parameterType="inquiry">
+		DELETE FROM
+		board_inquiry
+		WHERE inquiry_no =
+		#{inquiry_no}
+	</delete>
+
+
+
+
+</mapper>
